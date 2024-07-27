@@ -116,7 +116,7 @@ class GetStartedPage extends GetView<GetStartedController>
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 20,
                                         ),
-                                        primary: Theme.of(context).primaryColor,
+                                        // primary: Theme.of(context).primaryColor,
                                       ),
                                       onPressed: controller
                                               .hasUserChooserAtLeastOneChoice

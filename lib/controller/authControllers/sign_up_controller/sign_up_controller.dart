@@ -10,11 +10,10 @@ class SignUpController extends GetxController {
   // Get moment time (in this case, get more info about user)
   FieldValue thisMomentTime = FieldValue.serverTimestamp();
 
-
-
-
   // Input controllers
-  late TextEditingController signUpUserController,
+  late TextEditingController signUpFirstNameController,
+      signUpLastNameController,
+      signUpPhoneController,
       signUpEmailController,
       signUpPasswordController;
 

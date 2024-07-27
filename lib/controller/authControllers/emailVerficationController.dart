@@ -36,47 +36,47 @@ class EmailVerificatioController extends GetxController {
     );
   }
 
-  // Check email if it s verified by user
-  checkEmailVerified() async {
-    // show loading
-    dialogsAndLoadingController.showLoading();
+  // // Check email if it s verified by user
+  // checkEmailVerified() async {
+  //   // show loading
+  //   dialogsAndLoadingController.showLoading();
 
-    // Reload data under the hood to re-check of validity
-    await FirebaseAuth.instance.currentUser?.reload();
+  //   // Reload data under the hood to re-check of validity
+  //   await FirebaseAuth.instance.currentUser?.reload();
 
-    // Get & store new isVerified value
-    bool? emailVerifiedAfterReload =
-        FirebaseAuth.instance.currentUser?.emailVerified;
+  //   // Get & store new isVerified value
+  //   bool? emailVerifiedAfterReload =
+  //       FirebaseAuth.instance.currentUser?.emailVerified;
 
-    // check now
-    if (emailVerifiedAfterReload == true) {
-      // Updating in firestore
-      await FirebaseFirestore.instance
-          .collection("aboutUsers")
-          .doc(user!.uid)
-          .update({
-        "verified": emailVerifiedAfterReload,
-      });
+  //   // check now
+  //   if (emailVerifiedAfterReload == true) {
+  //     // Updating in firestore
+  //     await FirebaseFirestore.instance
+  //         .collection("aboutUsers")
+  //         .doc(user!.uid)
+  //         .update({
+  //       "verified": emailVerifiedAfterReload,
+  //     });
 
-      // Go to homepage now
-      Get.offAll(HomePage());
-    }
+  //     // Go to homepage now
+  //     Get.offAll(HomePage());
+  //   }
 
-    // Check if it's false
-    else if (emailVerifiedAfterReload == false) {
-      // Pop loading
-      Get.back();
+  //   // Check if it's false
+  //   else if (emailVerifiedAfterReload == false) {
+  //     // Pop loading
+  //     Get.back();
 
-      // Show error to user
-      dialogsAndLoadingController
-          .showError(capitalize(AppTexts.pleaseVerifyEmail));
-    }
-  }
+  //     // Show error to user
+  //     dialogsAndLoadingController
+  //         .showError(capitalize(AppTexts.pleaseVerifyEmail));
+  //   }
+  // }
 
   @override
   void onInit() async {
     // send verification email before page is loading
-    await user!.sendEmailVerification();
+ 
     super.onInit();
   }
 

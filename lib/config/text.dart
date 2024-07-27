@@ -1,4 +1,3 @@
-
 // to-do: correct spells, search for more texts in app if I forget to add them here
 class AppTexts {
   static String error = "Error";
@@ -37,6 +36,10 @@ class AppTexts {
   static String signUpDescription =
       "Join more than 100,000 warriors and train for the next big challenge";
   static String username = "username";
+  static String firstName = "first name";
+  static String lastName = "last name";
+  static String phone = "phone";
+
   static String alreadyHaveAnAccount = "Already have an account ?";
   static String find = "find";
   static String yourWorkout = 'your Workout';
@@ -74,12 +77,13 @@ class AppTexts {
   static String wrongPassword = "wrong password";
   static String invalidEmail = "Invalid email address, try again";
   static String enterPassword = "Please enter your password";
-  static String passwordMustBe5AtLeast = "Password must be at least 5 characters long";
+  static String passwordMustBe5AtLeast =
+      "Password must be at least 5 characters long";
   static String usernameMustBe5AtLeast =
       "username must be at least 5 characters long";
   static String weakPassword = "weak password, try with stronger one";
   static String emailAlreadyInUse = "this email is already in use";
-  static String fillFields =  "please, fill all fields";
+  static String fillFields = "please, fill all fields";
   // static String basedOnReviews = "based on users reviews";
   // static String basedOnReviews = "based on users reviews";
   // static String basedOnReviews = "based on users reviews";
@@ -95,5 +99,4 @@ class AppTexts {
   // static String basedOnReviews = "based on users reviews";
   // static String basedOnReviews = "based on users reviews";
   // static String basedOnReviews = "based on users reviews";
-
 }

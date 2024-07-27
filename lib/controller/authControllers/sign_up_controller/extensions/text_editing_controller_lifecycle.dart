@@ -6,11 +6,16 @@ extension TextEditingCtrlLifeCycleExt on SignUpController {
   void _disposeTextEditingControllers() {
     signUpEmailController.dispose();
     signUpPasswordController.dispose();
-    signUpUserController.dispose();
+    signUpFirstNameController.dispose();
+    signUpLastNameController.dispose();
+    signUpPhoneController.dispose();
   }
 
   void _initializeTextEditingControllers() {
-    signUpUserController = TextEditingController();
+    signUpFirstNameController = TextEditingController();
+    signUpLastNameController = TextEditingController();
+    signUpPhoneController = TextEditingController();
+
     signUpEmailController = TextEditingController();
     signUpPasswordController = TextEditingController();
   }

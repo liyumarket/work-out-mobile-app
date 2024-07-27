@@ -65,13 +65,41 @@ class SignUpPage extends GetView<SignUpController> with DelayHelperMixin {
                           description: AppTexts.signUpDescription,
                         ),
                       ),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       DelayedDisplay(
                         delay: getDelayDuration(),
                         child: CustomTextField(
                           keyboardType: TextInputType.name,
-                          controller: controller.signUpUserController,
-                          label: capitalize(AppTexts.username),
+                          controller: controller.signUpFirstNameController,
+                          label: capitalize(AppTexts.firstName),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      DelayedDisplay(
+                        delay: getDelayDuration(),
+                        child: CustomTextField(
+                          keyboardType: TextInputType.name,
+                          controller: controller.signUpLastNameController,
+                          label: capitalize(AppTexts.lastName),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      DelayedDisplay(
+                        delay: getDelayDuration(),
+                        child: CustomTextField(
+                          keyboardType: TextInputType.phone,
+                          controller: controller.signUpPhoneController,
+                          label: capitalize(AppTexts.phone),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                       DelayedDisplay(
                         delay: getDelayDuration(),
@@ -80,6 +108,9 @@ class SignUpPage extends GetView<SignUpController> with DelayHelperMixin {
                           controller: controller.signUpEmailController,
                           label: capitalize(AppTexts.email),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                       DelayedDisplay(
                         delay: getDelayDuration(),
@@ -98,14 +129,18 @@ class SignUpPage extends GetView<SignUpController> with DelayHelperMixin {
                             child: CustomButton(
                               onPressed: () {
                                 controller.createNewAccount(
-                                  email: controller.signUpEmailController.text
-                                      .trim(),
-                                  password: controller
-                                      .signUpPasswordController.text
-                                      .trim(),
-                                  username: controller.signUpUserController.text
-                                      .trim(),
-                                );
+                                    email: controller.signUpEmailController.text
+                                        .trim(),
+                                    password: controller
+                                        .signUpPasswordController.text
+                                        .trim(),
+                                    firstname: controller
+                                        .signUpFirstNameController.text
+                                        .trim(),
+                                    lastname: controller
+                                        .signUpLastNameController.text,
+                                    phone:
+                                        controller.signUpPhoneController.text);
                               },
                               isRounded: false,
                               text: capitalize(AppTexts.signUp),

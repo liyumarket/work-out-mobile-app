@@ -335,8 +335,8 @@ class UserInformationController extends GetxController {
 
   @override
   void onInit() {
-    setUsername();
-    setProfileImgPath();
+    // setUsername();
+    // setProfileImgPath();
     super.onInit();
   }
 }

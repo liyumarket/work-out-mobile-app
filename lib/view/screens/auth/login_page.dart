@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:work_out/config/show_delay_mixin.dart';
 import 'package:work_out/config/text.dart';
 import 'package:work_out/controller/authControllers/login_controller/extensions/login_with_account.dart';
+import 'package:work_out/controller/authControllers/sign_up_controller/sign_up_controller.dart';
 import 'package:work_out/view/widgets/general_widgets/screen_background_image.dart';
 
 import '../../../controller/authControllers/login_controller/login_controller.dart';
@@ -66,16 +67,19 @@ class LoginPage extends GetView<LoginController> with DelayHelperMixin {
                           description: AppTexts.loginDescription,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      const Spacer(
+                        flex: 1,
                       ),
                       DelayedDisplay(
                         delay: getDelayDuration(),
                         child: CustomTextField(
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.phone,
                           controller: controller.loginEmailController,
                           label: capitalize(AppTexts.email),
                         ),
+                      ),
+                      const Spacer(
+                        flex: 1,
                       ),
                       DelayedDisplay(
                         delay: getDelayDuration(),
@@ -137,6 +141,7 @@ class LoginPage extends GetView<LoginController> with DelayHelperMixin {
                             delay: getDelayDuration(),
                             child: CustomButton(
                               onPressed: () {
+                                Get.put(SignUpController());
                                 Get.to(() => SignUpPage());
                               },
                               isRounded: false,

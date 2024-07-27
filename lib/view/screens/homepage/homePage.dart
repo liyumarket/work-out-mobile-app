@@ -73,18 +73,19 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 50,
                     ),
-                    Obx(
-                      () => ProfileAndUsername(
-                        onProfileImgTap: () {
-                          Get.to(() => const UserProfile());
-                        },
-                        username: capitalize(
-                          userInformationController.username.value,
-                        ),
-                        profileImg:
-                            userInformationController.userProfileImg.value,
-                      ),
-                    ),
+                    // Obx(
+                    //   () =>
+                       ProfileAndUsername(
+                          onProfileImgTap: () {
+                            Get.to(() => const UserProfile());
+                          },
+                          username: capitalize(
+                              // userInformationController.username.value,
+                              'test'),
+                          profileImg: ''
+                          // userInformationController.userProfileImg.value,
+                          ),
+                    // ),
                     const SizedBox(
                       height: 55,
                     ),
@@ -135,6 +136,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: TabBar(
                           labelColor: Colors.white,
+                          labelStyle: const TextStyle(color: Colors.white),
+                          unselectedLabelColor: Colors.white,
+                          unselectedLabelStyle:
+                              const TextStyle(color: Colors.white),
+                          labelPadding:
+                              const EdgeInsets.symmetric(horizontal: 5),
                           isScrollable: true,
                           indicator: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),

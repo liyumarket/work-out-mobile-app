@@ -72,7 +72,7 @@ class EmailVerificatioPage extends StatelessWidget {
                   text: capitalize(AppTexts.done),
                   isOutlined: false,
                   onPressed: () {
-                    emailVerificatioController.checkEmailVerified();
+                    // emailVerificatioController.checkEmailVerified();
                   }),
               const SizedBox(
                 height: 20,

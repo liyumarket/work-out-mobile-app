@@ -49,6 +49,7 @@ class FunctionsController extends GetxController {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: ThemeData.light().primaryColor,
             actionsAlignment: MainAxisAlignment.center,
             title: Text(AppTexts.filterBy),
             content: const ItemsCheckboxTiles(),

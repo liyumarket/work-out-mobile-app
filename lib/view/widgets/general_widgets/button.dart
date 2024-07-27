@@ -39,10 +39,11 @@ class CustomButton extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(isRounded ? 30 : 10),
                     ),
-                    primary: isOutlined
+                    backgroundColor: isOutlined
                         ? Colors.transparent
                         : Theme.of(context).primaryColor,
-                    onPrimary: Theme.of(context).primaryColor),
+                    // onPrimary: Theme.of(context).primaryColor
+                    ),
                 child: Text(
                   text,
                   style: const TextStyle(
