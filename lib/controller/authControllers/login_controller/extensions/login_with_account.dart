@@ -6,6 +6,7 @@ import 'package:work_out/service/dio_service.dart';
 
 import '../../../../config/text.dart';
 import '../../../../helpers/string_methods.dart';
+import '../../../../view/screens/homepage/homePage.dart';
 import '../login_controller.dart';
 
 extension LoginWithAccountExtension on LoginController {
@@ -26,6 +27,8 @@ extension LoginWithAccountExtension on LoginController {
         );
 
         final user = response.data;
+        Get.offAll(HomePage());
+
         // no need for popping the loading dialog since if it's working, the auth listener will do its work
       } on FirebaseAuthException catch (e) {
         // on error, first pop the loading dialog

@@ -127,7 +127,7 @@ class GetStartedPage extends GetView<GetStartedController>
                                       child: Text(
                                         capitalize(AppTexts.next),
                                         style: const TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.green,
                                         ),
                                       ),
                                     );
