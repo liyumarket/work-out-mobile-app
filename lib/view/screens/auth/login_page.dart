@@ -75,7 +75,7 @@ class LoginPage extends GetView<LoginController> with DelayHelperMixin {
                         child: CustomTextField(
                           keyboardType: TextInputType.phone,
                           controller: controller.loginEmailController,
-                          label: capitalize(AppTexts.email),
+                          label: capitalize(AppTexts.phone),
                         ),
                       ),
                       const Spacer(

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:work_out/config/Colors.dart';
 import 'package:work_out/config/text.dart';
 import 'package:work_out/config/workouts%20lists/workouts%20Lists.dart';
+import 'package:work_out/controller/category_controller.dart';
 import 'package:work_out/view/screens/user%20profile/userProfil.dart';
 
 import '../../../controller/functionsController.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   final UserInformationController userInformationController =
       Get.put(UserInformationController());
-
+  final CategoryController _categoryController = Get.put(CategoryController());
   final CustomTabBarController _tabx = Get.put(CustomTabBarController());
 
   @override
@@ -75,16 +76,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // Obx(
                     //   () =>
-                      //  ProfileAndUsername(
-                      //     onProfileImgTap: () {
-                      //       Get.to(() => const UserProfile());
-                      //     },
-                      //     username: capitalize(
-                      //         // userInformationController.username.value,
-                      //         'test'),
-                      //     profileImg: ''
-                      //     // userInformationController.userProfileImg.value,
-                      //     ),
+                    //  ProfileAndUsername(
+                    //     onProfileImgTap: () {
+                    //       Get.to(() => const UserProfile());
+                    //     },
+                    //     username: capitalize(
+                    //         // userInformationController.username.value,
+                    //         'test'),
+                    //     profileImg: ''
+                    //     // userInformationController.userProfileImg.value,
+                    //     ),
                     // ),
                     const SizedBox(
                       height: 55,

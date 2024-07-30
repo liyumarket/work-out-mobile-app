@@ -1,16 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:work_out/controller/authControllers/sign_up_controller/extensions/create_new_account/add_user_info_to_firestore.dart';
-import 'package:work_out/controller/authControllers/sign_up_controller/extensions/create_new_account/sign_up_catched_error.dart';
+import 'package:work_out/config/text.dart';
 import 'package:work_out/helpers/extension/user_info_validator_extension.dart';
+import 'package:work_out/helpers/string_methods.dart';
+import 'package:work_out/model/user_response.dart';
 import 'package:work_out/service/dio_service.dart';
 import 'package:work_out/view/screens/homepage/homePage.dart';
 
-import '../../../../../config/text.dart';
-import '../../../../../helpers/string_methods.dart';
-import '../../../../../view/screens/auth/EmailVerification.dart';
 import '../../sign_up_controller.dart';
 
 extension CreateNewAccExtension on SignUpController {
@@ -38,7 +35,9 @@ extension CreateNewAccExtension on SignUpController {
         },
       );
 
-      final user = response.data;
+
+      final user = UserResponse.fromJson(response.data);
+
       print(user);
       //     // // Firebase create account method, store the credential
       //     // final UserCredential credential =
@@ -79,30 +78,24 @@ extension CreateNewAccExtension on SignUpController {
     // }
 
     // Now, if something isn't valid, inform user about it
-    // if (username.isEmpty || email.isEmpty || password.isEmpty) {
-    //   dialogsAndLoadingController.showError(
-    //     capitalize(
-    //       AppTexts.fillFields,
-    //     ),
-    //   );
-    // } else if (!username.isAcceptedUsername) {
-    //   dialogsAndLoadingController.showError(
-    //     capitalize(
-    //       AppTexts.usernameMustBe5AtLeast,
-    //     ),
-    //   );
-    // if (!email.isValidEmail) {
-    //   dialogsAndLoadingController.showError(
-    //     capitalize(
-    //       AppTexts.invalidEmail,
-    //     ),
-    //   );
-    // } else if (!password.isValidPassword) {
-    //   dialogsAndLoadingController.showError(
-    //     capitalize(
-    //       AppTexts.passwordMustBe5AtLeast,
-    //     ),
-    //   );
-    // }
+    if (firstname.isEmpty || email.isEmpty || password.isEmpty) {
+      dialogsAndLoadingController.showError(
+        capitalize(
+          AppTexts.fillFields,
+        ),
+      );
+    } else if (!email.isValidEmail) {
+      dialogsAndLoadingController.showError(
+        capitalize(
+          AppTexts.invalidEmail,
+        ),
+      );
+    } else if (!password.isValidPassword) {
+      dialogsAndLoadingController.showError(
+        capitalize(
+          AppTexts.passwordMustBe5AtLeast,
+        ),
+      );
+    }
   }
 }

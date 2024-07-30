@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:work_out/bindings/initial_binding.dart';
 import 'package:work_out/config/Themes/mainThemeFile.dart';
 import 'package:work_out/config/initial_main_methods/initial_main_methods.dart';
+import 'package:work_out/service/local_storage_service.dart';
 import 'config/routes.dart';
 
 void main() async {
   await MainMethods.init();
+  SharedPreferencesService.getInstance();
   runApp(
     const WorkoutApp(),
   );
