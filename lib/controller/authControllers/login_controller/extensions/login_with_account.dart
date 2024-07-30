@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/controller/authControllers/login_controller/extensions/handle_error_cases.dart';
 import 'package:work_out/helpers/extension/user_info_validator_extension.dart';
 import 'package:work_out/service/dio_service.dart';
+import 'package:work_out/view/screens/homepage/homePage.dart';
 
 import '../../../../config/text.dart';
 import '../../../../helpers/string_methods.dart';
@@ -26,11 +29,24 @@ extension LoginWithAccountExtension on LoginController {
         );
 
         final user = response.data;
+        print(user);
+        Get.offAll(()=>HomePage());
+
         // no need for popping the loading dialog since if it's working, the auth listener will do its work
-      } on FirebaseAuthException catch (e) {
-        // on error, first pop the loading dialog
-        Get.back();
-        handleErrorCases(e);
+      } on DioException catch (e) {
+        debugPrint(e.toString());
+        dialogsAndLoadingController.showError(
+          capitalize(
+            e.message ?? "Network error",
+          ),
+        );
+      } on Exception catch (e) {
+        debugPrint(e.toString());
+        dialogsAndLoadingController.showError(
+          capitalize(
+            e.toString(),
+          ),
+        );
       }
     }
 

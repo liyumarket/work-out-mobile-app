@@ -75,16 +75,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // Obx(
                     //   () =>
-                       ProfileAndUsername(
-                          onProfileImgTap: () {
-                            Get.to(() => const UserProfile());
-                          },
-                          username: capitalize(
-                              // userInformationController.username.value,
-                              'test'),
-                          profileImg: ''
-                          // userInformationController.userProfileImg.value,
-                          ),
+                      //  ProfileAndUsername(
+                      //     onProfileImgTap: () {
+                      //       Get.to(() => const UserProfile());
+                      //     },
+                      //     username: capitalize(
+                      //         // userInformationController.username.value,
+                      //         'test'),
+                      //     profileImg: ''
+                      //     // userInformationController.userProfileImg.value,
+                      //     ),
                     // ),
                     const SizedBox(
                       height: 55,
