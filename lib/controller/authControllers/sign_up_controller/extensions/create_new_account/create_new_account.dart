@@ -6,6 +6,7 @@ import 'package:work_out/helpers/extension/user_info_validator_extension.dart';
 import 'package:work_out/helpers/string_methods.dart';
 import 'package:work_out/model/user_response.dart';
 import 'package:work_out/service/dio_service.dart';
+import 'package:work_out/service/local_storage_service.dart';
 import 'package:work_out/view/screens/homepage/homePage.dart';
 
 import '../../sign_up_controller.dart';
@@ -37,7 +38,7 @@ extension CreateNewAccExtension on SignUpController {
 
 
       final user = UserResponse.fromJson(response.data);
-
+SharedPreferencesService().setValue('token', user.message!.token);
       print(user);
       //     // // Firebase create account method, store the credential
       //     // final UserCredential credential =

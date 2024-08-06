@@ -67,39 +67,39 @@ class AllWorkoutsPage extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            DelayedDisplay(
-              delay: Duration(milliseconds: delay + 100),
-              slidingBeginOffset: const Offset(0.0, 0.1),
-              child: MainWorkoutCard(
-                isFavortite: false,
-                sectionTitle: AppTexts.workoutOfDay,
-                description: AppTexts.basedOnReviews,
-                imagePath: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["imagePath"],
-                cardTitle: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["workOutTitle"],
-                filledStars: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["rating"],
-                timeLeft: controller.filterWorkoutWith(Get.arguments[1],
-                    "isWorkoutOfDay", "true")["timeLeftInHour"],
-                comments: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["comments"],
-                durationInMinutes: controller.filterWorkoutWith(
-                    Get.arguments[1],
-                    "isWorkoutOfDay",
-                    "true")["durationInMinutes"],
-                hasFreeTrial: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["hasFreeTrial"],
-                movesNumber: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["movesNumber"],
-                priceInDollars: controller.filterWorkoutWith(Get.arguments[1],
-                    "isWorkoutOfDay", "true")["priceInDollars"],
-                setsNumber: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["setsNumber"],
-                reviews: controller.filterWorkoutWith(
-                    Get.arguments[1], "isWorkoutOfDay", "true")["reviews"],
-              ),
-            ),
+            // DelayedDisplay(
+            //   delay: Duration(milliseconds: delay + 100),
+            //   slidingBeginOffset: const Offset(0.0, 0.1),
+            //   child: MainWorkoutCard(
+            //     isFavortite: false,
+            //     sectionTitle: AppTexts.workoutOfDay,
+            //     description: AppTexts.basedOnReviews,
+            //     imagePath: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["imagePath"],
+            //     cardTitle: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["workOutTitle"],
+            //     filledStars: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["rating"],
+            //     timeLeft: controller.filterWorkoutWith(Get.arguments[1],
+            //         "isWorkoutOfDay", "true")["timeLeftInHour"],
+            //     comments: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["comments"],
+            //     durationInMinutes: controller.filterWorkoutWith(
+            //         Get.arguments[1],
+            //         "isWorkoutOfDay",
+            //         "true")["durationInMinutes"],
+            //     hasFreeTrial: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["hasFreeTrial"],
+            //     movesNumber: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["movesNumber"],
+            //     priceInDollars: controller.filterWorkoutWith(Get.arguments[1],
+            //         "isWorkoutOfDay", "true")["priceInDollars"],
+            //     setsNumber: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["setsNumber"],
+            //     reviews: controller.filterWorkoutWith(
+            //         Get.arguments[1], "isWorkoutOfDay", "true")["reviews"],
+            //   ),
+            // ),
             const SizedBox(
               height: 40,
             ),
@@ -111,47 +111,47 @@ class AllWorkoutsPage extends StatelessWidget {
                 title: capitalize(
                   AppTexts.withDiscounts,
                 ),
-                dataList: controller.filteredListwith(
-                    Get.arguments[1], "isDiscounted", "true"),
+                dataList: Get.arguments[1],
                 hasSeeAllButton: false,
               ),
             ),
             const SizedBox(
               height: 40,
             ),
-            DelayedDisplay(
-              slidingBeginOffset: const Offset(0.0, 0.1),
-              delay: Duration(milliseconds: delay + 200),
-              child: MainWorkoutCard(
-                isFavortite: false,
-                sectionTitle: AppTexts.dailyFreeWorkout,
-                description: AppTexts.choosedCarefully,
-                imagePath: controller.filterWorkoutWith(
-                    Get.arguments[1], "dailyFreeWorkout", "true")["imagePath"],
-                cardTitle: controller.filterWorkoutWith(Get.arguments[1],
-                    "dailyFreeWorkout", "true")["workOutTitle"],
-                filledStars: controller.filterWorkoutWith(
-                    Get.arguments[1], "dailyFreeWorkout", "true")["rating"],
-                timeLeft: controller.filterWorkoutWith(Get.arguments[1],
-                    "dailyFreeWorkout", "true")["timeLeftInHour"],
-                comments: controller.filterWorkoutWith(
-                    Get.arguments[1], "dailyFreeWorkout", "true")["comments"],
-                durationInMinutes: controller.filterWorkoutWith(
-                    Get.arguments[1],
-                    "dailyFreeWorkout",
-                    "true")["durationInMinutes"],
-                hasFreeTrial: controller.filterWorkoutWith(Get.arguments[1],
-                    "dailyFreeWorkout", "true")["hasFreeTrial"],
-                movesNumber: controller.filterWorkoutWith(Get.arguments[1],
-                    "dailyFreeWorkout", "true")["movesNumber"],
-                priceInDollars: controller.filterWorkoutWith(Get.arguments[1],
-                    "dailyFreeWorkout", "true")["priceInDollars"],
-                setsNumber: controller.filterWorkoutWith(
-                    Get.arguments[1], "dailyFreeWorkout", "true")["setsNumber"],
-                reviews: controller.filterWorkoutWith(
-                    Get.arguments[1], "dailyFreeWorkout", "true")["reviews"],
-              ),
-            ),
+            // DelayedDisplay(
+            //   slidingBeginOffset: const Offset(0.0, 0.1),
+            //   delay: Duration(milliseconds: delay + 200),
+            //   child: MainWorkoutCard(
+            //     isFavortite: false,
+            //     sectionTitle: AppTexts.dailyFreeWorkout,
+            //     description: AppTexts.choosedCarefully,
+            //     imagePath: controller.filterWorkoutWith(
+            //         Get.arguments[1], "dailyFreeWorkout", "true")["imagePath"],
+            //     cardTitle: controller.filterWorkoutWith(Get.arguments[1],
+            //         "dailyFreeWorkout", "true")["workOutTitle"],
+            //     filledStars: controller.filterWorkoutWith(
+            //         Get.arguments[1], "dailyFreeWorkout", "true")["rating"],
+            //     timeLeft: controller.filterWorkoutWith(Get.arguments[1],
+            //         "dailyFreeWorkout", "true")["timeLeftInHour"],
+            //     comments: controller.filterWorkoutWith(
+            //         Get.arguments[1], "dailyFreeWorkout", "true")["comments"],
+            //     durationInMinutes: controller.filterWorkoutWith(
+            //         Get.arguments[1],
+            //         "dailyFreeWorkout",
+            //         "true")["durationInMinutes"],
+            //     hasFreeTrial: controller.filterWorkoutWith(Get.arguments[1],
+            //         "dailyFreeWorkout", "true")["hasFreeTrial"],
+            //     movesNumber: controller.filterWorkoutWith(Get.arguments[1],
+            //         "dailyFreeWorkout", "true")["movesNumber"],
+            //     priceInDollars: controller.filterWorkoutWith(Get.arguments[1],
+            //         "dailyFreeWorkout", "true")["priceInDollars"],
+            //     setsNumber: controller.filterWorkoutWith(
+            //         Get.arguments[1], "dailyFreeWorkout", "true")["setsNumber"],
+            //     reviews: controller.filterWorkoutWith(
+            //         Get.arguments[1], "dailyFreeWorkout", "true")["reviews"],
+            //   ),
+            // ),
+           
             const SizedBox(
               height: 40,
             ),

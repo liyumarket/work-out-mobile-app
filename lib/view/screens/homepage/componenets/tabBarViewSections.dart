@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/controller/functionsController.dart';
 import 'package:work_out/config/images%20sources.dart';
+import 'package:work_out/model/video_by_category.dart';
 
 import '../../../../config/text.dart';
 import '../../../../helpers/string_methods.dart';
@@ -17,7 +18,7 @@ class TabBarViewSection extends StatelessWidget {
     this.hasSeeAllButton = true,
   }) : super(key: key);
   String title;
-  List dataList;
+  List<SingleVideo> dataList;
   bool hasSeeAllButton;
   int itemsToShow;
   final FunctionsController controller = Get.put(FunctionsController());
@@ -66,26 +67,29 @@ class TabBarViewSection extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          child: Wrap(
-            children: [
-              ...List.generate(
-                itemsToShow < dataList.length ? 3 : dataList.length,
-                (index) => WorkOutCard(
-                    index: index,
-                    listCollection: dataList,
-                    title: capitalize(
-                      dataList[index]["workOutTitle"] ??
-                          AppTexts.somethingWrong,
-                    ),
-                    imagePath:
-                        dataList[index]["imagePath"] ?? ImgSrc.noImgAvailable),
+        dataList.isEmpty
+            ? const Center(
+                child: Text('we are adding workouts visit after a while'),
               )
-            ],
-          ),
-        )
+            : SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                child: Wrap(
+                  children: [
+                    ...List.generate(
+                      itemsToShow < dataList.length ? 3 : dataList.length,
+                      (index) => WorkOutCard(
+                          index: index,
+                          listCollection: dataList,
+                          title: capitalize(
+                            dataList[index].title ?? AppTexts.somethingWrong,
+                          ),
+                          imagePath:
+                              dataList[index].image ?? ImgSrc.noImgAvailable),
+                    )
+                  ],
+                ),
+              )
       ],
     );
   }

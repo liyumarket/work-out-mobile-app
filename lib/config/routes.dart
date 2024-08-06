@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:work_out/bindings/home_binding.dart';
 import 'package:work_out/view/screens/auth/sign_up_page.dart';
+import 'package:work_out/view/screens/homepage/homePage.dart';
 import 'package:work_out/view/screens/welcome/welcome_page.dart';
 
 import '../bindings/forgot_password_binding.dart';
@@ -38,6 +40,12 @@ class Routes {
       name: "/forgotPassword",
       page: () => ForgotPasswordPage(),
       binding: ForgotPasswordBinding(),
+    ),
+     GetPage(
+      name: "/home",
+      page: () => HomePage(),
+      binding: HomePageBinding()
+    
     ),
   ];
 }

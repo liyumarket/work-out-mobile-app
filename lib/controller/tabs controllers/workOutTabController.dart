@@ -2,78 +2,90 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/controller/category_controller.dart';
 import 'package:work_out/model/categories_response.dart';
+import 'package:work_out/model/video_by_category.dart';
+import 'package:work_out/service/dio_service.dart';
+import 'package:work_out/service/local_storage_service.dart';
 
 class CustomTabBarController extends GetxController
-    with GetTickerProviderStateMixin  {
+    with GetTickerProviderStateMixin {
   // TabController
   late TabController workOutTabController;
   final CategoryController _categoryController = Get.put(CategoryController());
+  final DioService _dioService = DioService(); // Your DioService instance
   RxList<Message> categories = <Message>[].obs;
+  Rx<Message> selectedCategory = Message().obs;
   // Tabs to show
-  final List<Tab> workOutTabs = <Tab>[
-    const Tab(
-        child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Text("All"),
-    )),
-    const Tab(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text("Popular"))),
-    const Tab(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text('Hard workout'))),
-    const Tab(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text('Full body'))),
-    const Tab(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text('Crossfit'))),
-  ];
+  RxList<Tab> workOutTabs = <Tab>[].obs;
+  RxList<SingleVideo> videos = <SingleVideo>[].obs; // Store fetched videos
+
+  void _initializeTabController() {
+    if (workOutTabs.isNotEmpty) {
+      workOutTabController =
+          TabController(vsync: this, length: workOutTabs.length);
+      workOutTabController.addListener(_onTabChange);
+    }
+  }
+
   void _updateTabs() {
     workOutTabs.clear();
-    workOutTabs.add(
-      const Tab(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text("All"),
-        ),
-      ),
-    );
+
     for (var category in categories) {
       workOutTabs.add(
         Tab(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(category.name??''),
+            child: Text(category.name ?? ''),
           ),
         ),
       );
     }
-    if (workOutTabController != null) {
-      workOutTabController.dispose();
-    }
-    workOutTabController = TabController(vsync: this, length: workOutTabs.length);
+    _fetchVideosByCategory(categories.first.id);
+    selectedCategory.value = categories.first;
+    _initializeTabController();
     update();
+  }
+
+  void _onTabChange() async {
+    if (workOutTabController.indexIsChanging) {
+      selectedCategory.value = categories[workOutTabController.index];
+      final selectedCategoryId = categories[workOutTabController.index].id;
+      await _fetchVideosByCategory(selectedCategoryId);
+    }
+  }
+
+  Future<void> _fetchVideosByCategory(int? categoryId) async {
+    try {
+      String token = SharedPreferencesService().getValue('token');
+
+      final response = await _dioService.getRequest(
+          'http://128.140.107.116:4400/api/v1/admin/getAllVideosByCategory/$categoryId',
+          headers: {'x-api-key': token});
+      videos.value = VideoByCategory.fromJson(response.data).message ??
+          []; // Update videos list
+    } catch (e) {
+      print('Error fetching videos: $e');
+    }
   }
 
   @override
   void onInit() {
-    // init on init hah
-      workOutTabController = TabController(vsync: this, length: workOutTabs.length);
-    categories.value = _categoryController.categories.value.message ?? [];
-    _updateTabs();
-
     super.onInit();
+    categories.bindStream(_categoryController.categories.stream
+        .map((data) => data.message ?? []));
+
+    categories.listen((_) {
+      if (categories.isNotEmpty) {
+        _updateTabs();
+      }
+    });
   }
 
   @override
   void onClose() {
-    // dispose
-    workOutTabController.dispose();
+    if (workOutTabController != null) {
+      workOutTabController.removeListener(_onTabChange);
+      workOutTabController.dispose();
+    }
     super.onClose();
   }
 }

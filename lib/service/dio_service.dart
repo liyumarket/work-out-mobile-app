@@ -3,9 +3,17 @@ import 'package:dio/dio.dart';
 class DioService {
   final Dio _dio = Dio();
 
-  Future<Response> getRequest(String url, {Map<String, dynamic>? queryParameters}) async {
+  Future<Response> getRequest(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) async {
     try {
-      final response = await _dio.get(url, queryParameters: queryParameters);
+      final response = await _dio.get(
+        url,
+        queryParameters: queryParameters,
+        options: Options(headers: headers),
+      );
       return _handleResponse(response);
     } on DioException catch (e) {
       throw _handleDioError(e);

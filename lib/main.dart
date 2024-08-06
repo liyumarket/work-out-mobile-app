@@ -7,8 +7,11 @@ import 'package:work_out/service/local_storage_service.dart';
 import 'config/routes.dart';
 
 void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure Flutter is initialized before async code
   await MainMethods.init();
-  SharedPreferencesService.getInstance();
+  await SharedPreferencesService.getInstance();
+
   runApp(
     const WorkoutApp(),
   );
@@ -25,7 +28,8 @@ class WorkoutApp extends StatelessWidget {
       theme: MainTheme(context).themeData,
       debugShowCheckedModeBanner: false,
       getPages: Routes.pages,
-      initialRoute: "/",
+      initialRoute:
+          "/",
     );
   }
 }

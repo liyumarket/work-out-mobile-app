@@ -37,7 +37,12 @@ class _HomePageState extends State<HomePage> {
       Get.put(UserInformationController());
   final CategoryController _categoryController = Get.put(CategoryController());
   final CustomTabBarController _tabx = Get.put(CustomTabBarController());
-
+@override
+  void initState() {
+    // TODO: implement initState
+    print('home called');
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,78 +134,61 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    SizedBox(
                       height: 40,
                       child: DelayedDisplay(
                         delay: Duration(
                           milliseconds: delay + 400,
                         ),
-                        child: TabBar(
-                          labelColor: Colors.white,
-                          labelStyle: const TextStyle(color: Colors.white),
-                          unselectedLabelColor: Colors.white,
-                          unselectedLabelStyle:
-                              const TextStyle(color: Colors.white),
-                          labelPadding:
-                              const EdgeInsets.symmetric(horizontal: 5),
-                          isScrollable: true,
-                          indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: Theme.of(context).primaryColor,
-                              width: 2,
-                            ),
-                          ),
-                          controller: _tabx.workOutTabController,
-                          tabs: _tabx.workOutTabs,
-                        ),
+                        child: Obx(() {
+                          // Ensure workOutTabController is initialized
+                          if (_tabx.workOutTabs.isNotEmpty) {
+                            return TabBar(
+                              labelColor: Colors.white,
+                              labelStyle: const TextStyle(color: Colors.white),
+                              unselectedLabelColor: Colors.white,
+                              unselectedLabelStyle:
+                                  const TextStyle(color: Colors.white),
+                              labelPadding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              isScrollable: true,
+                              indicator: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2,
+                                ),
+                              ),
+                              controller: _tabx.workOutTabController,
+                              tabs: _tabx.workOutTabs,
+                            );
+                          } else {
+                            // Handle case when tabs are not yet initialized
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        }),
                       ),
                     ),
                     Expanded(
                       child: DelayedDisplay(
                         delay: Duration(milliseconds: delay + 600),
-                        child: TabBarView(
-                          controller: _tabx.workOutTabController,
-                          children: [
-                            Center(
-                              child: TabBarViewSection(
-                                title: capitalize(
-                                  'All workouts',
-                                ),
-                                dataList: WorkoutsList.allWorkoutsList,
-                              ),
-                            ),
-                            Center(
-                              child: TabBarViewSection(
-                                title: capitalize(
-                                  'Popular',
-                                ),
-                                dataList: WorkoutsList.popularWorkoutsList,
-                              ),
-                            ),
-                            Center(
-                              child: TabBarViewSection(
-                                  title: capitalize(
-                                    'hard',
+                        child: Obx(() => _tabx.workOutTabs.isNotEmpty
+                            ? TabBarView(
+                                controller: _tabx.workOutTabController,
+                                children: [
+                                  Center(
+                                    child: TabBarViewSection(
+                                      title: capitalize(
+                                        _tabx.selectedCategory.value.name ?? '',
+                                      ),
+                                      dataList: _tabx.videos,
+                                    ),
                                   ),
-                                  dataList: WorkoutsList.hardWorkoutsList),
-                            ),
-                            Center(
-                              child: TabBarViewSection(
-                                  title: capitalize(
-                                    'Full body',
-                                  ),
-                                  dataList: WorkoutsList.fullBodyWorkoutsList),
-                            ),
-                            Center(
-                              child: TabBarViewSection(
-                                  title: capitalize(
-                                    'Crossfit',
-                                  ),
-                                  dataList: WorkoutsList.crossFit),
-                            ),
-                          ],
-                        ),
+                                ],
+                              )
+                            : const SizedBox()),
                       ),
                     ),
                   ],

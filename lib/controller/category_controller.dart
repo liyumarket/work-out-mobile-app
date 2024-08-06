@@ -5,6 +5,7 @@ import 'package:work_out/controller/functionsController/dialogsAndLoadingControl
 import 'package:work_out/helpers/string_methods.dart';
 import 'package:work_out/model/categories_response.dart';
 import 'package:work_out/service/dio_service.dart';
+import 'package:work_out/service/local_storage_service.dart';
 
 class CategoryController extends GetxController {
   final DioService _dioService = DioService();
@@ -21,9 +22,17 @@ class CategoryController extends GetxController {
   Future<void> fetchCategories() async {
     isLoading(true);
     try {
+      String token = SharedPreferencesService().getValue('token');
+      print(token);
       final response = await _dioService.getRequest(
-          'http://128.140.107.116:4400/api/v1/admin/getAllCategory');
+          'http://128.140.107.116:4400/api/v1/admin/getAllCategory',
+          headers: {
+            'x-api-key': token
+          });
+
       categories.value = CategoriesResponse.fromJson(response.data);
+      print(categories.value.message );
+
       errorMessage('');
     } on DioException catch (e) {
       debugPrint(e.toString());
