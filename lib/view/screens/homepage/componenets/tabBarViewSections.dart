@@ -69,7 +69,10 @@ class TabBarViewSection extends StatelessWidget {
         ),
         dataList.isEmpty
             ? const Center(
-                child: Text('we are adding workouts visit after a while'),
+                child: Text(
+                  'we are adding workouts visit after a while',
+                  style: TextStyle(color: Colors.white),
+                ),
               )
             : SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -84,6 +87,7 @@ class TabBarViewSection extends StatelessWidget {
                           title: capitalize(
                             dataList[index].title ?? AppTexts.somethingWrong,
                           ),
+                          videoUrl: 'http://128.140.107.116:4400/api/v1/admin/video/${dataList[index].id}',
                           imagePath:
                               dataList[index].image ?? ImgSrc.noImgAvailable),
                     )

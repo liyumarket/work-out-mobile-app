@@ -28,8 +28,7 @@ class WorkoutApp extends StatelessWidget {
       theme: MainTheme(context).themeData,
       debugShowCheckedModeBanner: false,
       getPages: Routes.pages,
-      initialRoute:
-          "/",
+      initialRoute:  '/',
     );
   }
 }

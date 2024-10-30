@@ -2,23 +2,18 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/config/Colors.dart';
-import 'package:work_out/config/text.dart';
-import 'package:work_out/config/workouts%20lists/workouts%20Lists.dart';
 import 'package:work_out/controller/category_controller.dart';
-import 'package:work_out/view/screens/user%20profile/userProfil.dart';
+import 'package:work_out/service/local_storage_service.dart';
 
 import '../../../controller/functionsController.dart';
 import '../../../controller/tabs controllers/workOutTabController.dart';
-import '../../../controller/userController/userController.dart';
 import '../../../config/images sources.dart';
 import '../../../helpers/string_methods.dart';
 import '../../widgets/general_widgets/screen_background_image.dart';
 import 'componenets/HomePageSearchBar.dart';
-import 'componenets/ItemsSwitchTiles.dart';
 import 'componenets/find_your_workout.dart';
 import 'componenets/playButton.dart';
 import 'componenets/tabBarViewSections.dart';
-import 'componenets/usernameAndProfile.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -31,10 +26,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final FunctionsController controller = Get.put(FunctionsController());
 
-  final UserInformationController userInformationController =
-      Get.put(UserInformationController());
+
   final CategoryController _categoryController = Get.put(CategoryController());
   final CustomTabBarController _tabx = Get.put(CustomTabBarController());
 @override
@@ -77,21 +70,15 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
-                    // Obx(
-                    //   () =>
-                    //  ProfileAndUsername(
-                    //     onProfileImgTap: () {
-                    //       Get.to(() => const UserProfile());
-                    //     },
-                    //     username: capitalize(
-                    //         // userInformationController.username.value,
-                    //         'test'),
-                    //     profileImg: ''
-                    //     // userInformationController.userProfileImg.value,
-                    //     ),
-                    // ),
+                   Align(
+                    alignment: Alignment.topRight,
+                     child: IconButton(onPressed: (){
+                      Get.offAndToNamed('/');
+                      SharedPreferencesService().removeValue('token');
+                     }, icon: Icon(Icons.logout,color: Colors.white,size: 40,)),
+                   ),
                     const SizedBox(
                       height: 55,
                     ),
@@ -102,28 +89,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 55,
                     ),
-                    DelayedDisplay(
-                      delay: Duration(milliseconds: delay + 200),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const FindYourWorkout(),
-                          GestureDetector(
-                            onTap: (() {
-                              controller.showFilterDialog(context);
-                            }),
-                            child: const Icon(
-                              Icons.filter_alt_outlined,
-                              color: Colors.white,
-                              size: 26,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                   
+                  
                     SizedBox(
                       height: 45,
                       child: DelayedDisplay(

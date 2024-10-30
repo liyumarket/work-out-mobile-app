@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/config/Colors.dart';
+import 'package:work_out/view/screens/work%20out%20details/video_player.dart';
 
 import '../../work out details/workOutDetails.dart';
 
@@ -11,30 +12,34 @@ class WorkOutCard extends StatelessWidget {
     required this.imagePath,
     required this.listCollection,
     required this.index,
+    required this.videoUrl,
   }) : super(key: key);
 
   String title;
   String imagePath;
+  final String videoUrl;
+
   List listCollection;
   int index;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(WorkOutDetails(
-          workOutTitle: title,
-          overlayedImg: imagePath,
-          timeLeftInHour: listCollection[index]["timeLeftInHour"] ?? "?",
-          movesNumber: listCollection[index]["movesNumber"] ?? "?",
-          setsNumber: listCollection[index]["setsNumber"] ?? "?",
-          durationInMinutes: listCollection[index]["durationInMinutes"] ?? "?",
-          rating: listCollection[index]["rating"] ?? "?",
-          description: listCollection[index]["description"] ?? "?",
-          reviews: listCollection[index]["reviews"] ?? "?",
-          comments: listCollection[index]["comments"] ?? "?",
-          priceInDollars: listCollection[index]["priceInDollars"] ?? "?",
-          hasFreeTrial: listCollection[index]["hasFreeTrial"] ?? "?",
-        ));
+        Get.to(VideoPlayerWidget(videoUrl: videoUrl,));
+        // Get.to(WorkOutDetails(
+        //   workOutTitle: title,
+        //   overlayedImg: '',
+        //   timeLeftInHour: listCollection[index]["timeLeftInHour"] ?? "?",
+        //   movesNumber: listCollection[index]["movesNumber"] ?? "?",
+        //   setsNumber: listCollection[index]["setsNumber"] ?? "?",
+        //   durationInMinutes: listCollection[index]["durationInMinutes"] ?? "?",
+        //   rating: listCollection[index]["rating"] ?? "?",
+        //   description: listCollection[index]["description"] ?? "?",
+        //   reviews: listCollection[index]["reviews"] ?? "?",
+        //   comments: listCollection[index]["comments"] ?? "?",
+        //   priceInDollars: listCollection[index]["priceInDollars"] ?? "?",
+        //   hasFreeTrial: listCollection[index]["hasFreeTrial"] ?? "?",
+        // ));
       },
       child: Container(
         margin: const EdgeInsets.only(right: 20),
@@ -48,7 +53,7 @@ class WorkOutCard extends StatelessWidget {
                 width: 130,
                 height: 130,
                 child: Image.asset(
-                  imagePath,
+                  'imgs/1.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
