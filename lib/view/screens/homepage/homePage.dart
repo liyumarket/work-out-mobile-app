@@ -2,8 +2,10 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/config/Colors.dart';
+import 'package:work_out/config/text.dart';
 import 'package:work_out/controller/category_controller.dart';
 import 'package:work_out/service/local_storage_service.dart';
+import 'package:work_out/view/screens/category_list/category_list.dart';
 
 import '../../../controller/functionsController.dart';
 import '../../../controller/tabs controllers/workOutTabController.dart';
@@ -26,16 +28,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   final CategoryController _categoryController = Get.put(CategoryController());
   final CustomTabBarController _tabx = Get.put(CustomTabBarController());
-@override
+  @override
   void initState() {
     // TODO: implement initState
     print('home called');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +73,19 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 30,
                     ),
-                   Align(
-                    alignment: Alignment.topRight,
-                     child: IconButton(onPressed: (){
-                      Get.offAndToNamed('/');
-                      SharedPreferencesService().removeValue('token');
-                     }, icon: Icon(Icons.logout,color: Colors.white,size: 40,)),
-                   ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          onPressed: () {
+                            Get.offAndToNamed('/');
+                            SharedPreferencesService().removeValue('token');
+                          },
+                          icon: Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                            size: 40,
+                          )),
+                    ),
                     const SizedBox(
                       height: 55,
                     ),
@@ -89,8 +96,6 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 55,
                     ),
-                   
-                  
                     SizedBox(
                       height: 45,
                       child: DelayedDisplay(
@@ -99,6 +104,27 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(
+                      height: 15,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Get.to(()=>CategoryList());
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white.withOpacity(.1),
+                        ),
+                        child: Text(
+                          capitalize(AppTexts.allWorkouts),
+                          style: TextStyle(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ),
+                     const SizedBox(
                       height: 15,
                     ),
                     SizedBox(
@@ -141,21 +167,22 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: DelayedDisplay(
                         delay: Duration(milliseconds: delay + 600),
-                        child: Obx(() => _tabx.workOutTabs.isNotEmpty
-                            ? TabBarView(
-                                controller: _tabx.workOutTabController,
-                                children: [
-                                  Center(
-                                    child: TabBarViewSection(
-                                      title: capitalize(
-                                        _tabx.selectedCategory.value.name ?? '',
-                                      ),
-                                      dataList: _tabx.videos,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : const SizedBox()),
+                        child: Obx(() {
+                          if (_tabx.workOutTabs.isEmpty)
+                            return const SizedBox();
+
+                          return TabBarView(
+                            controller: _tabx.workOutTabController,
+                            children: _tabx.categories.map((category) {
+                              return Center(
+                                child: TabBarViewSection(
+                                  title: capitalize(category.name ?? ''),
+                                  dataList: _tabx.videos,
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        }),
                       ),
                     ),
                   ],

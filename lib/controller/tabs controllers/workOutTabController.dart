@@ -19,10 +19,13 @@ class CustomTabBarController extends GetxController
   RxList<SingleVideo> videos = <SingleVideo>[].obs; // Store fetched videos
 
   void _initializeTabController() {
+    // workOutTabController?.dispose(); // Dispose previous instance if any
     if (workOutTabs.isNotEmpty) {
       workOutTabController =
           TabController(vsync: this, length: workOutTabs.length);
       workOutTabController.addListener(_onTabChange);
+    } else {
+      workOutTabController = TabController(vsync: this, length: 1);
     }
   }
 
@@ -46,11 +49,9 @@ class CustomTabBarController extends GetxController
   }
 
   void _onTabChange() async {
-    if (workOutTabController.indexIsChanging) {
-      selectedCategory.value = categories[workOutTabController.index];
-      final selectedCategoryId = categories[workOutTabController.index].id;
-      await _fetchVideosByCategory(selectedCategoryId);
-    }
+    final selectedCategoryId = categories[workOutTabController.index].id;
+    selectedCategory.value = categories[workOutTabController.index];
+    await _fetchVideosByCategory(selectedCategoryId);
   }
 
   Future<void> _fetchVideosByCategory(int? categoryId) async {
@@ -62,6 +63,7 @@ class CustomTabBarController extends GetxController
           headers: {'x-api-key': token});
       videos.value = VideoByCategory.fromJson(response.data).message ??
           []; // Update videos list
+      print(videos.length);
     } catch (e) {
       print('Error fetching videos: $e');
     }

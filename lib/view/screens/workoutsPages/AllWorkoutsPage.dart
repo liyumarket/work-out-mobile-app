@@ -22,29 +22,30 @@ class AllWorkoutsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.darkBlue,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
+        preferredSize: const Size.fromHeight(40),
         child: DelayedDisplay(
           slidingBeginOffset: const Offset(0.0, 0.1),
           delay: Duration(milliseconds: delay),
           child: AppBar(
             actions: [
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Avatar(
-                    onProfileImgTap: () {
-                      Get.to(() => const UserProfile());
-                    },
-                    networkImage:
-                        userInformationController.userProfileImg.value,
-                  ),
-                ),
-              ),
+              // Container(
+              //   margin:
+              //       const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              //   child: AspectRatio(
+              //     aspectRatio: 1,
+              //     child: Avatar(
+              //       onProfileImgTap: () {
+              //         Get.to(() => const UserProfile());
+              //       },
+              //       networkImage:
+              //           userInformationController.userProfileImg.value,
+              //     ),
+              //   ),
+              // ),
+          
             ],
             elevation: 0,
-            toolbarHeight: 80,
+          
             iconTheme: const IconThemeData(
               color: Colors.white,
             ),
@@ -65,7 +66,7 @@ class AllWorkoutsPage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 40,
+              height: 10,
             ),
             // DelayedDisplay(
             //   delay: Duration(milliseconds: delay + 100),
@@ -103,21 +104,21 @@ class AllWorkoutsPage extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            DelayedDisplay(
-              slidingBeginOffset: const Offset(0.0, 0.1),
-              delay: Duration(milliseconds: delay + 100),
-              child: TabBarViewSection(
-                itemsToShow: WorkoutsList.allWorkoutsList.length,
-                title: capitalize(
-                  AppTexts.withDiscounts,
-                ),
-                dataList: Get.arguments[1],
-                hasSeeAllButton: false,
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
+            // DelayedDisplay(
+            //   slidingBeginOffset: const Offset(0.0, 0.1),
+            //   delay: Duration(milliseconds: delay + 100),
+            //   child: TabBarViewSection(
+            //     itemsToShow: WorkoutsList.allWorkoutsList.length,
+            //     title: capitalize(
+            //       AppTexts.withDiscounts,
+            //     ),
+            //     dataList: Get.arguments[1],
+            //     hasSeeAllButton: false,
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 40,
+            // ),
             // DelayedDisplay(
             //   slidingBeginOffset: const Offset(0.0, 0.1),
             //   delay: Duration(milliseconds: delay + 200),
@@ -153,7 +154,7 @@ class AllWorkoutsPage extends StatelessWidget {
             // ),
            
             const SizedBox(
-              height: 40,
+              height: 5,
             ),
             DelayedDisplay(
               slidingBeginOffset: const Offset(0.0, 0.1),

@@ -77,22 +77,24 @@ class TabBarViewSection extends StatelessWidget {
             : SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                child: Wrap(
-                  children: [
-                    ...List.generate(
-                      itemsToShow < dataList.length ? 3 : dataList.length,
-                      (index) => WorkOutCard(
-                          index: index,
-                          listCollection: dataList,
-                          title: capitalize(
-                            dataList[index].title ?? AppTexts.somethingWrong,
-                          ),
-                          videoUrl: 'http://128.140.107.116:4400/api/v1/admin/video/${dataList[index].id}',
-                          imagePath:
-                              dataList[index].image ?? ImgSrc.noImgAvailable),
-                    )
-                  ],
-                ),
+                child: Obx(() => Wrap(
+                      children: [
+                        ...List.generate(
+                           dataList.length,
+                          (index) => WorkOutCard(
+                              index: index,
+                              listCollection: dataList,
+                              title: capitalize(
+                                dataList[index].title ??
+                                    AppTexts.somethingWrong,
+                              ),
+                              videoUrl:
+                                  'http://128.140.107.116:4400/api/v1/admin/video/${dataList[index].id}',
+                              imagePath: dataList[index].image ??
+                                  ImgSrc.noImgAvailable),
+                        )
+                      ],
+                    )),
               )
       ],
     );
