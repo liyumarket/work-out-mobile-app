@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get.dart';
 import 'package:work_out/bindings/initial_binding.dart';
 import 'package:work_out/config/Themes/mainThemeFile.dart';
@@ -22,13 +23,14 @@ class WorkoutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       defaultTransition: Transition.fade,
       theme: MainTheme(context).themeData,
       debugShowCheckedModeBanner: false,
       getPages: Routes.pages,
-      initialRoute:  '/',
+      initialRoute: '/',
     );
   }
 }

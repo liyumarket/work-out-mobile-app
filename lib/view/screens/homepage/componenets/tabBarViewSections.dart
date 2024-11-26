@@ -74,26 +74,33 @@ class TabBarViewSection extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               )
-            : SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Obx(() => Wrap(
-                      children: [
-                        ...List.generate(
-                           dataList.length,
-                          (index) => WorkOutCard(
-                              index: index,
-                              listCollection: dataList,
-                              title: capitalize(
-                                dataList[index].title ??
-                                    AppTexts.somethingWrong,
-                              ),
-                              videoUrl:
-                                  'http://128.140.107.116:4400/api/v1/admin/video/${dataList[index].id}',
-                              imagePath: dataList[index].image ??
-                                  ImgSrc.noImgAvailable),
-                        )
-                      ],
+            : Expanded(
+                child: Obx(() => GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of items per row
+                        crossAxisSpacing: 10.0, // Spacing between columns
+                        mainAxisSpacing: 10.0, // Spacing between rows
+                        childAspectRatio:
+                            1.0, // Adjust for item height/width ratio
+                      ),
+                      itemCount: dataList.length,
+                      itemBuilder: (context, index) {
+                        return WorkOutCard(
+                          id: dataList[index].id,
+                          index: index,
+                          listCollection: dataList,
+                          title: capitalize(
+                            dataList[index].title ?? AppTexts.somethingWrong,
+                          ),
+                          videoUrl:
+                              'http://128.140.107.116:4400/api/v1/admin/video/${dataList[index].id}',
+                          imagePath:
+                              dataList[index].image ?? ImgSrc.noImgAvailable,
+                        );
+                      },
                     )),
               )
       ],

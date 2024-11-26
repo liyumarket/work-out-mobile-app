@@ -23,15 +23,43 @@ class CategoryController extends GetxController {
     isLoading(true);
     try {
       String token = SharedPreferencesService().getValue('token');
-      print(token);
+
       final response = await _dioService.getRequest(
           'http://128.140.107.116:4400/api/v1/admin/getAllCategory',
-          headers: {
-            'x-api-key': token
-          });
+          headers: {'x-api-key': token});
 
       categories.value = CategoriesResponse.fromJson(response.data);
-      print(categories.value.message );
+
+      errorMessage('');
+    } on DioException catch (e) {
+      debugPrint(e.toString());
+      dialogsAndLoadingController.showError(
+        capitalize(
+          e.message ?? "Network error",
+        ),
+      );
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      dialogsAndLoadingController.showError(
+        capitalize(
+          e.toString(),
+        ),
+      );
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> fetchCategoryById(int id) async {
+    isLoading(true);
+    try {
+      String token = SharedPreferencesService().getValue('token');
+
+      final response = await _dioService.getRequest(
+          'http://128.140.107.116:4400/api/v1/admin/getAllVideosByCategory/$id',
+          headers: {'x-api-key': token});
+
+      categories.value = CategoriesResponse.fromJson(response.data);
 
       errorMessage('');
     } on DioException catch (e) {

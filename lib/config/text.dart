@@ -20,7 +20,7 @@ class AppTexts {
   static String signIn = "sign in";
   static String signUp = "sign up";
   static String loginDescription =
-      "Train and live the new experience of exercising at home";
+      "Train and live the new experience of exercising at work";
   static String email = "email";
   static String password = "password";
   static String forgetPassword = "forgot password ?";
