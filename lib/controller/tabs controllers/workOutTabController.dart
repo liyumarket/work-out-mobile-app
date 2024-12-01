@@ -42,7 +42,7 @@ class CustomTabBarController extends GetxController
         ),
       );
     }
-    _fetchVideosByCategory(categories.first.id);
+    fetchVideosByCategory(categories.first.id);
     selectedCategory.value = categories.first;
     _initializeTabController();
     update();
@@ -51,10 +51,10 @@ class CustomTabBarController extends GetxController
   void _onTabChange() async {
     final selectedCategoryId = categories[workOutTabController.index].id;
     selectedCategory.value = categories[workOutTabController.index];
-    await _fetchVideosByCategory(selectedCategoryId);
+    await fetchVideosByCategory(selectedCategoryId);
   }
 
-  Future<void> _fetchVideosByCategory(int? categoryId) async {
+  Future<void> fetchVideosByCategory(int? categoryId) async {
     try {
       String token = SharedPreferencesService().getValue('token');
 
@@ -63,7 +63,6 @@ class CustomTabBarController extends GetxController
           headers: {'x-api-key': token});
       videos.value = VideoByCategory.fromJson(response.data).message ??
           []; // Update videos list
-      print(videos.length);
     } catch (e) {
       print('Error fetching videos: $e');
     }

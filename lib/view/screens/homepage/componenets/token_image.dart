@@ -1,47 +1,18 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:cached_network_image/cached_network_image.dart';
 
-class TokenImage extends StatefulWidget {
+class TokenImage extends StatelessWidget {
   final String imageUrl;
-  final String accessToken;
 
-  const TokenImage(
-      {super.key, required this.imageUrl, required this.accessToken});
-
-  @override
-  _TokenImageState createState() => _TokenImageState();
-}
-
-class _TokenImageState extends State<TokenImage> {
-  Uint8List? _imageBytes;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchImage();
-  }
-
-  Future<void> _fetchImage() async {
-    try {
-      final response = await http.get(
-        Uri.parse(widget.imageUrl),
-        headers: {'x-api-key': 'Bearer ${widget.accessToken}'},
-      );
-      print(widget.accessToken);
-      if (response.statusCode == 200) {
-        setState(() {
-          _imageBytes = response.bodyBytes;
-        });
-      } else {}
-    } catch (e) {}
-  }
+  const TokenImage({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
-    return _imageBytes != null
-        ? Image.memory(_imageBytes!)
-        : const CircularProgressIndicator();
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+      fit: BoxFit.cover, // Optional: Adjust based on your UI needs
+    );
   }
 }

@@ -4,13 +4,10 @@ import 'package:get/get.dart';
 import 'package:work_out/controller/functionsController.dart';
 import 'package:work_out/config/Colors.dart';
 import 'package:work_out/config/text.dart';
-import 'package:work_out/view/screens/homepage/componenets/avatar.dart';
 import '../../../controller/userController/userController.dart';
 import '../../../config/workouts lists/workouts Lists.dart';
 import '../../../helpers/string_methods.dart';
 import '../homepage/componenets/tabBarViewSections.dart';
-import '../user profile/userProfil.dart';
-import 'components/mainWorkoutCard.dart';
 
 // ignore: must_be_immutable
 class AllWorkoutsPage extends StatelessWidget {
@@ -20,6 +17,7 @@ class AllWorkoutsPage extends StatelessWidget {
   final userInformationController = Get.put(UserInformationController());
   @override
   Widget build(BuildContext context) {
+    print( Get.arguments);
     return Scaffold(
       backgroundColor: AppColors.darkBlue,
       appBar: PreferredSize(

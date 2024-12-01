@@ -63,7 +63,6 @@ class WorkOutCard extends StatelessWidget {
                   child: TokenImage(
                     imageUrl:
                         'http://128.140.107.116:4400/api/v1/admin/image/${id}',
-                    accessToken: token,
                   )),
             ),
             const SizedBox(

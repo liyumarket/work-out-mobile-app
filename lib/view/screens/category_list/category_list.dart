@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_out/config/Colors.dart';
 import 'package:work_out/controller/category_controller.dart';
+import 'package:work_out/controller/tabs%20controllers/workOutTabController.dart';
+import 'package:work_out/view/screens/workoutsPages/AllWorkoutsPage.dart';
 
 class CategoryList extends StatelessWidget {
   final CategoryController _categoryController = Get.put(CategoryController());
-
+  final CustomTabBarController videoController =
+      Get.find<CustomTabBarController>();
   CategoryList({super.key});
 
   @override
@@ -92,8 +95,14 @@ class CategoryList extends StatelessWidget {
                                     color: Theme.of(context).primaryColor),
                               ),
                             ),
-                            onTap: () {
-                              // Handle category item tap if needed
+                            onTap: () async {
+                              await CustomTabBarController()
+                                  .fetchVideosByCategory(category.id);
+                            
+                              Get.to(() => AllWorkoutsPage(), arguments: [
+                                category.name,
+                                 videoController.videos
+                              ]);
                             },
                           ),
                         );
